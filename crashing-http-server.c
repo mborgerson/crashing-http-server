@@ -61,8 +61,8 @@ static void handle_connection(int fd)
 }
 
 /*
- * Starts the main listen/accept loop, processes connections sequentially. Pass
- * port in as first CLI argument.
+ * Starts the main listen/accept loop, processes connections sequentially.
+ * Optionally pass port in with `-p <port>` argument.
  */
 int main(int argc, char const *argv[])
 {
@@ -72,8 +72,11 @@ int main(int argc, char const *argv[])
     int addrlen = sizeof(address);
     int port = 80;
 
-    if (argc > 1) {
-        port = atoi(argv[1]);
+    for (int i = 1; i < (argc - 1); i++) {
+        if (!strcmp(argv[i], "-p")) {
+            port = atoi(argv[i+1]);
+            break;
+        }
     }
 
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
