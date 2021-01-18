@@ -70,10 +70,10 @@ int main(int argc, char const *argv[])
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
+    int port = 80;
 
-    if (argc < 2) {
-        fprintf(stderr, "usage: %s <port>\n", argv[0]);
-        exit(EXIT_FAILURE);
+    if (argc > 1) {
+        port = atoi(argv[1]);
     }
 
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -88,7 +88,7 @@ int main(int argc, char const *argv[])
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(atoi(argv[1]));
+    address.sin_port = htons(port);
 
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
         perror("bind");
