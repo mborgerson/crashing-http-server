@@ -9,4 +9,4 @@ clean:
 	rm -f $(TARGET)
 
 $(TARGET): $(TARGET).c
-	$(CC) -o $@ $^
+	$(CC) -o $@ $(CFLAGS) $^
