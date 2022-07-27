@@ -1,5 +1,5 @@
 TARGET = crashing-http-server
-CFLAGS = -Wall -pedantic -static
+CFLAGS = -Wall -pedantic
 
 .PHONY: all
 all: $(TARGET)
